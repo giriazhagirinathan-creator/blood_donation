@@ -140,16 +140,47 @@ const Dashboard = () => {
               </div>
 
               {compatibleGroups.length > 0 && (
-                <div className="mt-6 animate-in fade-in slide-in-from-top-2 duration-300">
-                  <p className="text-sm font-medium text-blue-200 mb-3 flex items-center gap-2">
-                    <Info className="w-4 h-4" /> Compatible Donors for {searchQuery}:
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {compatibleGroups.map(group => (
-                      <span key={group} className="bg-white/20 border border-white/30 px-4 py-2 rounded-lg font-bold text-lg backdrop-blur-sm shadow-sm">
-                        {group}
-                      </span>
-                    ))}
+                <div className="mt-8 animate-in fade-in slide-in-from-top-4 duration-500">
+                  <div className="flex flex-col md:flex-row gap-8">
+                    {/* Compatibility Logic Info */}
+                    <div className="flex-1">
+                      <p className="text-sm font-bold text-blue-200 mb-3 flex items-center gap-2 uppercase tracking-widest">
+                        <Info className="w-4 h-4" /> Compatible Groups:
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {compatibleGroups.map(group => (
+                          <span key={group} className="bg-white/20 border border-white/30 px-4 py-2 rounded-xl font-black text-lg backdrop-blur-sm shadow-inner">
+                            {group}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Matching Real Donors */}
+                    <div className="flex-[2]">
+                      <p className="text-sm font-bold text-blue-200 mb-3 flex items-center gap-2 uppercase tracking-widest">
+                        <Users className="w-4 h-4" /> Matching Donors Nearby:
+                      </p>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {donors.filter(d => compatibleGroups.includes(d.blood_type)).length > 0 ? (
+                          donors.filter(d => compatibleGroups.includes(d.blood_type)).map(donor => (
+                            <div key={donor.id} className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl flex justify-between items-center group hover:bg-white/20 transition-all cursor-default">
+                              <div>
+                                <p className="font-bold text-white">{donor.name}</p>
+                                <p className="text-xs text-blue-200">{donor.contact}</p>
+                              </div>
+                              <span className="bg-white text-blue-700 px-3 py-1 rounded-lg font-black text-xs shadow-lg">
+                                {donor.blood_type}
+                              </span>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="col-span-full py-4 px-6 border-2 border-dashed border-white/20 rounded-2xl text-blue-100 text-sm font-medium">
+                            No matching donors found in the database for this type.
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
