@@ -40,9 +40,9 @@ const Dashboard = () => {
       setFilteredRequests(activeRequests);
     } else {
       const matches = activeRequests.filter(req => 
-        req.hospitalName.toLowerCase().includes(q) ||
-        req.patientName.toLowerCase().includes(q) ||
-        req.bloodGroup.toLowerCase().includes(q)
+        (req.hospitalName?.toLowerCase() || '').includes(q) ||
+        (req.patientName?.toLowerCase() || '').includes(q) ||
+        (req.bloodGroup?.toLowerCase() || '').includes(q)
       );
       setFilteredRequests(matches);
     }

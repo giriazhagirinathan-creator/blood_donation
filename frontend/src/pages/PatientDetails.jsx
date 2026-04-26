@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MapPin, Phone, User, Heart, ArrowLeft, Hospital, Calendar, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, User, Heart, ArrowLeft, Hospital, Calendar, AlertCircle, Droplet } from 'lucide-react';
 
 const PatientDetails = () => {
   const { id } = useParams();
@@ -155,7 +155,7 @@ const PatientDetails = () => {
           
           <div className="bg-red-50 p-6 text-center">
             <p className="text-red-900/60 text-sm font-bold">
-              Your help can save {patient.patientName.split(' ')[0]}'s life today. 
+              Your help can save {patient.patientName?.split(' ')[0] || 'the patient'}'s life today. 
             </p>
           </div>
         </div>
