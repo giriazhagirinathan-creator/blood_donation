@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import RequestForm from './pages/RequestForm';
-import Dashboard from './pages/Dashboard';
+import PatientDetails from './pages/PatientDetails';
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/request" element={<RequestForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/patient/:id" element={<PatientDetails />} />
           </Routes>
         </main>
       </div>

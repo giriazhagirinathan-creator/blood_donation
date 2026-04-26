@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapPin, Clock, Droplet, Users, Trash2, Search, Info, Building2 } from 'lucide-react';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [activeRequests, setActiveRequests] = useState([]);
   const [filteredRequests, setFilteredRequests] = useState([]);
   const [donors, setDonors] = useState([]);
@@ -248,8 +250,8 @@ const Dashboard = () => {
                           </div>
                         ) : (
                           <button 
-                            onClick={() => handleAccept(req.id)}
-                            className="bg-gray-900 text-white py-4 px-8 rounded-2xl font-black hover:bg-blue-600 transition-all shadow-xl hover:shadow-blue-100 active:scale-95"
+                            onClick={() => navigate(`/patient/${req.id}`)}
+                            className="bg-gray-900 text-white py-4 px-8 rounded-2xl font-black hover:bg-red-600 transition-all shadow-xl hover:shadow-red-100 active:scale-95"
                           >
                             HELP NOW
                           </button>
