@@ -8,14 +8,15 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     setLoading(true);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     try {
       // Fetch requests (MySQL)
-      const reqRes = await fetch('http://localhost:5000/api/requests');
+      const reqRes = await fetch(`${API_URL}/api/requests`);
       const reqData = await reqRes.json();
       setActiveRequests(Array.isArray(reqData) ? reqData : []);
 
       // Fetch donors (MySQL)
-      const donorRes = await fetch('http://localhost:5000/api/donors');
+      const donorRes = await fetch(`${API_URL}/api/donors`);
       const donorData = await donorRes.json();
       setDonors(Array.isArray(donorData) ? donorData : []);
 
@@ -33,8 +34,9 @@ const Dashboard = () => {
   const handleDelete = async (type, id) => {
     if (!window.confirm(`Are you sure you want to delete this ${type}?`)) return;
     
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     try {
-      const response = await fetch(`http://localhost:5000/api/${type === 'request' ? 'requests' : 'donors'}/${id}`, {
+      const response = await fetch(`${API_URL}/api/${type === 'request' ? 'requests' : 'donors'}/${id}`, {
         method: 'DELETE'
       });
       
@@ -51,8 +53,9 @@ const Dashboard = () => {
   };
 
   const handleAccept = async (id) => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     try {
-      const response = await fetch(`http://localhost:5000/api/requests/${id}`, {
+      const response = await fetch(`${API_URL}/api/requests/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'Fulfilled' })
